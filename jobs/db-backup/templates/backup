@@ -2,6 +2,8 @@
 
 set -e
 
-PATH=/var/vcap/packages/postgres-unknown/bin:/var/vcap/packages/postgresql_9.3/bin:$PATH
+PG_FOLDER=dirname `find -L /var/vcap/jobs/db-backup -name pg_dump -print`
+
+PATH=/var/vcap/packages/postgres-unknown/bin:/var/vcap/packages/postgresql_9.3/bin:$PG_FOLDER:$PATH
 
 pg_dump --user=atc --format=custom atc > $BBR_ARTIFACT_DIRECTORY/atc.backup
